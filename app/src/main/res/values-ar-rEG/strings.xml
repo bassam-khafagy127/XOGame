@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tic_toe">Tic Toe</string>
+    <string name="turn">دور:</string>
+    <string name="score">النتيجة</string>
+    <string name="x">X:</string>
+    <string name="o">O:</string>
+</resources>

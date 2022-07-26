@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">XoGame</string>
+    <string name="tic_toe">Tic Tac Toe</string>
+    <string name="turn">Turn:</string>
+    <string name="score">Score</string>
+    <string name="x">X:</string>
+    <string name="o">O:</string>
+</resources>
