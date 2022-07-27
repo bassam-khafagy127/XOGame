@@ -17,11 +17,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView x_score_tv, o_score_tv;
     ImageView reset;
-    CardView btn1, btn2,
-            btn3, btn4,
-            btn5, btn6,
-            btn7, btn8,
-            btn9;
+    CardView btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     String btn1_signe = "", btn2_signe = "", btn3_signe = "",
             btn4_signe = "", btn5_signe = "", btn6_signe = "",
             btn7_signe = "", btn8_signe = "", btn9_signe = "";
@@ -34,7 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //this line of code make x player as default player
     String general_turn = X_Turn;
 
-    int counter = 0;
+    int counter = 1;
+    int x_counter ;
+    int o_counter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         x_score_tv = findViewById(R.id.x_score);
         o_score_tv = findViewById(R.id.o_score);
+        o_counter=0;
+        x_counter=0;
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
 
             case R.id.btn2:
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.btn4:
                 if (turn == X_Turn && Objects.equals(btn4_signe, "")) {
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.btn5:
                 if (turn == X_Turn && Objects.equals(btn5_signe, "")) {
@@ -171,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.btn6:
                 if (turn == X_Turn && Objects.equals(btn6_signe, "")) {
@@ -184,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.btn7:
                 if (turn == X_Turn && Objects.equals(btn7_signe, "")) {
@@ -197,11 +202,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.btn8:
                 if (turn == X_Turn && Objects.equals(btn8_signe, "")) {
                     btn8.setBackgroundResource(R.drawable.ic_x_va);
                     btn8_signe = X_SIGNE;
+                    check_winner();
                     general_turn = O_Turn;
                 } else if (turn == O_Turn && Objects.equals(btn8_signe, "")) {
                     btn8.setBackgroundResource(R.drawable.ic_o_va);
@@ -209,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.btn9:
                 if (turn == X_Turn && Objects.equals(btn9_signe, "")) {
@@ -222,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     check_winner();
                     general_turn = X_Turn;
                 }
+                counter++;
                 break;
             case R.id.reset_btn:
                 reset_game();
@@ -242,11 +251,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         || btn4_signe == X_SIGNE && btn5_signe == X_SIGNE && btn6_signe == X_SIGNE
                         || btn7_signe == X_SIGNE && btn8_signe == X_SIGNE && btn9_signe == X_SIGNE) {
 
-            Toast.makeText(this, "player x", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(this, "player x", Toast.LENGTH_SHORT).show();
+            x_counter ++;
+            x_score_tv.setText("X: " + x_counter);
             dialogBuilder("Player X is Winne ");
+            Log.d(TAG, "x_counter"+x_counter);
 
-        }
-        if (
+        } else if (
                 btn1_signe == O_SIGNE && btn2_signe == O_SIGNE && btn3_signe == O_SIGNE
                         || btn1_signe == O_SIGNE && btn4_signe == O_SIGNE && btn7_signe == O_SIGNE
                         || btn1_signe == O_SIGNE && btn5_signe == O_SIGNE && btn9_signe == O_SIGNE
@@ -256,8 +267,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         || btn4_signe == O_SIGNE && btn5_signe == O_SIGNE && btn6_signe == O_SIGNE
                         || btn7_signe == O_SIGNE && btn8_signe == O_SIGNE && btn9_signe == O_SIGNE) {
 
-            Toast.makeText(this, "player o", Toast.LENGTH_SHORT).show();
+            o_counter += 1;
+            // Toast.makeText(this, "player o", Toast.LENGTH_SHORT).show();
             dialogBuilder("Player O is Winne");
+            o_score_tv.setText("O: " + o_counter);
+            Log.d(TAG, "o_counter"+o_counter);
+
+        } else if (counter == 9) {
+            Toast.makeText(this, "player noo", Toast.LENGTH_SHORT).show();
+            dialogBuilder("No one win");
         }
 
 
@@ -282,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn7.setBackground(null);
         btn8.setBackground(null);
         btn9.setBackground(null);
-
+        counter = 1;
     }
 
     public void dialogBuilder(String win) {
@@ -297,5 +315,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
         AlertDialog alertDialog = winner.create();
         alertDialog.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        x_counter = 1;
+        o_counter = 1;
     }
 }
