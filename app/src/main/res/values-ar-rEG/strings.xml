@@ -5,4 +5,5 @@
     <string name="score">النتيجة</string>
     <string name="x">X:</string>
     <string name="o">O:</string>
+    <string name="restart_game">إعادة اللعبة</string>
 </resources>
