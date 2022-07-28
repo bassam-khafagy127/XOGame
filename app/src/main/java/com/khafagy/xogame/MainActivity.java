@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     general_turn = O_Turn;
                 } else if (Objects.equals(turn, O_Turn) && Objects.equals(btn8_signe, "")) {
                     btn8.setBackgroundResource(R.drawable.ic_o_va);
-                    btn8_signe = X_SIGNE;
+                    btn8_signe = O_SIGNE;
                     check_winner();
                     general_turn = X_Turn;
                 }
